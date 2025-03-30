@@ -1,0 +1,11 @@
+*.vs
+*.fs
+*.hlsl
+*.glsl
+
+*.o
+*.obj
+*.pdb
+*.dll
+*.exe
+*.log
