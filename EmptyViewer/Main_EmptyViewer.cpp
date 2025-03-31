@@ -200,9 +200,9 @@ public:
 				float gamma = 2.2f;
 				vec3 corrected_color = pow(color, vec3(1.0f / gamma));
 
-				OutputImage.push_back(color.r);
-				OutputImage.push_back(color.g);
-				OutputImage.push_back(color.b);
+				OutputImage.push_back(corrected_color.r);
+				OutputImage.push_back(corrected_color.g);
+				OutputImage.push_back(corrected_color.b);
 
 			}
 		}
