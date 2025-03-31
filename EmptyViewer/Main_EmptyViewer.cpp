@@ -197,6 +197,8 @@ public:
 				Ray ray = camera.getRay(i, j);
 				vec3 color = trace(ray, 0.001f, FLT_MAX);
 
+				float gamma = 2.2f;
+				vec3 corrected_color = pow(color, vec3(1.0f / gamma));
 
 				OutputImage.push_back(color.r);
 				OutputImage.push_back(color.g);
