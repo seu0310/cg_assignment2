@@ -104,7 +104,7 @@ public:
 		nx = 512, ny = 512;
 	}
 
-	Ray getRay(int x, int y)
+	Ray getRay(float x, float y)
 	{
 		float u_coord = l + (r - l) * (x + 0.5f) / nx;
 		float v_coord = b + (t - b) * (y + 0.5f) / ny;
@@ -194,11 +194,22 @@ public:
 				// --- Implement your code here to generate the image
 				// ---------------------------------------------------
 
-				Ray ray = camera.getRay(i, j);
-				vec3 color = trace(ray, 0.001f, FLT_MAX);
+				int N = 64;
+				vec3 color_sum(0.0f);
+
+				for (int sample = 0; sample < N; sample++)
+				{
+					float dx = static_cast<float>(rand()) / RAND_MAX;
+					float dy = static_cast<float>(rand()) / RAND_MAX;
+
+					Ray ray = camera.getRay(i + dx, j + dy);
+					color_sum += trace(ray, 0.001f, FLT_MAX);
+				}
+
+				vec3 final_color = color_sum / float(N);
 
 				float gamma = 2.2f;
-				vec3 corrected_color = pow(color, vec3(1.0f / gamma));
+				vec3 corrected_color = pow(final_color, vec3(1.0f / gamma));
 
 				OutputImage.push_back(corrected_color.r);
 				OutputImage.push_back(corrected_color.g);
